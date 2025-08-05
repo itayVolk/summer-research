@@ -19,8 +19,7 @@
       "top": 109.21,
       "left": 144.43,
       "attrs": { "size": "17" }
-    },
-    { "type": "wokwi-dip-switch-8", "id": "sw1", "top": 111.9, "left": -257.7, "attrs": {} }
+    }
   ],
   "connections": [
     [ "drv1:1B", "stepper1:B-", "green", [ "h0" ] ],
@@ -34,9 +33,6 @@
     [ "drv1:GND.1", "bb1:bn.16", "black", [ "v0" ] ],
     [ "cell1:GND", "bb1:bn.30", "black", [ "h0" ] ],
     [ "cell1:VCC", "bb1:bp.31", "red", [ "h0" ] ],
-    [ "sw1:1b", "drv1:MS1", "green", [ "v0" ] ],
-    [ "sw1:2b", "drv1:MS2", "green", [ "v0" ] ],
-    [ "sw1:3b", "drv1:MS3", "green", [ "v0" ] ],
     [ "cell1:SCK", "uno:2", "green", [ "h0" ] ],
     [ "cell1:DT", "uno:3", "green", [ "h0" ] ],
     [ "drv1:DIR", "uno:12", "green", [ "h0" ] ],
