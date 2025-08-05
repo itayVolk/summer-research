@@ -58,7 +58,14 @@ const int thres = 100;
 
 void loop() {
   while(Serial.available()) {
-    lengths[index++] = Serial.parseInt();
+    long val = 0;
+    char cur = Serial.read();
+    while (cur != '\n') {
+      val = val*10 + cur - '0';
+      cur = Serial.read();
+    }
+    lengths[index++] = val;
+    Serial.println(lengths[index-1]);
     if (index == sizeof(sensors)/sizeof(int)) {
       index = 0;
     }
@@ -66,11 +73,17 @@ void loop() {
 
   long * out = read(sensors, sizeof(sensors)/sizeof(int));
   for (int i = 0; i < sizeof(sensors)/sizeof(int); i++) {
+    if (!lengths[i]) {
+      delay(250);
+      break;
+    }
+
     if (out[i] > lengths[i]+thres) {
       move(LOW, step, pins[i]);
     } else if (out[i] < lengths[i]-thres) {
       move(HIGH, step, pins[i]);
+    } else {
+      delay(250);
     }
   }
-  delay(1000);
 }
