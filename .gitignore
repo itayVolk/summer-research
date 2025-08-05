@@ -1,5 +1,4 @@
-*.3mf
-*.form
 *.code-workspace
 /.vscode
 /compiled
+/gcodes
