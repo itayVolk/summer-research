@@ -1,6 +1,6 @@
-const int pins[1][2] = {{13, 12}};
-const int sensors[1] = {3};
-const int clock = 2;
+const int pins[3][2] = {{13, 12}, {11, 10}, {9, 8}};
+const int sensors[3] = {2, 3, 4};
+const int clock = 1;
 
 long * lengths;
 int index = 0;
