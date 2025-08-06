@@ -1,5 +1,5 @@
-const int pins[3][2] = {{13, 12}, {11, 10}, {9, 8}};
-const int sensors[3] = {3, 4, 5};
+const int pins[1][2] = {{13, 12}};
+const int sensors[1] = {3};
 const int clock = 2;
 
 long * lengths;
@@ -33,7 +33,7 @@ long* read(int pins[], int count) {
   long * out = calloc(count, sizeof(long));
 
   //read 24 bits
-  for (int i = 0; i < 24; i++) {
+  for (int j = 0; j < 24; j++) {
     digitalWrite(clock, HIGH);
     digitalWrite(clock, LOW);
     for (int i = 0; i < count; i++) {
@@ -74,7 +74,6 @@ void loop() {
   long * out = read(sensors, sizeof(sensors)/sizeof(int));
   for (int i = 0; i < sizeof(sensors)/sizeof(int); i++) {
     if (!lengths[i]) {
-      delay(250);
       break;
     }
 
@@ -82,8 +81,6 @@ void loop() {
       move(LOW, step, pins[i]);
     } else if (out[i] < lengths[i]-thres) {
       move(HIGH, step, pins[i]);
-    } else {
-      delay(250);
     }
   }
 }
