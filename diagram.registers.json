@@ -70,7 +70,6 @@
       "rotate": 180,
       "attrs": { "size": "17" }
     },
-    { "type": "board-cd74hc4067", "id": "mux1", "top": -388.35, "left": 542.29, "attrs": {} },
     {
       "type": "wokwi-74hc595",
       "id": "sr1",
@@ -199,6 +198,62 @@
       "left": -224.8,
       "rotate": -90,
       "attrs": { "type": "5kg" }
+    },
+    {
+      "type": "wokwi-74hc595",
+      "id": "sr3",
+      "top": -280.26,
+      "left": 466.1,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r3",
+      "top": -360,
+      "left": 316.25,
+      "rotate": 90,
+      "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r5",
+      "top": -331.2,
+      "left": 220.25,
+      "rotate": 90,
+      "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r7",
+      "top": -321.6,
+      "left": 133.85,
+      "rotate": 90,
+      "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r9",
+      "top": -312,
+      "left": 47.45,
+      "rotate": 90,
+      "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r11",
+      "top": -302.4,
+      "left": -38.95,
+      "rotate": 90,
+      "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r12",
+      "top": -292.8,
+      "left": -125.35,
+      "rotate": 90,
+      "attrs": { "value": "10000" }
     }
   ],
   "connections": [
@@ -224,13 +279,6 @@
     [ "drv3:SLEEP", "drv3:RESET", "green", [ "h9.6", "v9.6" ] ],
     [ "drv3:GND.1", "bb1:bn.5", "black", [ "v0" ] ],
     [ "drv3:VDD", "bb1:bp.4", "red", [ "h0" ] ],
-    [ "mux1:S3", "uno:2", "violet", [ "h0" ] ],
-    [ "mux1:S2", "uno:3", "violet", [ "h0" ] ],
-    [ "mux1:S1", "uno:4", "violet", [ "h0" ] ],
-    [ "mux1:S0", "uno:5", "violet", [ "h0" ] ],
-    [ "mux1:GND", "bb1:bn.49", "black", [ "h0.03", "v220.8", "h-268.8" ] ],
-    [ "mux1:VCC", "bb1:bp.48", "red", [ "h-19.17", "v220.8", "h-259.2" ] ],
-    [ "mux1:EN", "uno:6", "green", [ "h0" ] ],
     [ "drv3:DIR", "sr1:Q1", "green", [ "h0" ] ],
     [ "drv1:DIR", "sr1:Q3", "green", [ "h0" ] ],
     [ "sr1:VCC", "bb1:bp.44", "red", [ "h-1.2", "v-57.6", "h-220" ] ],
@@ -298,7 +346,7 @@
     [ "bb1:33t.a", "bb1:34t.a", "white", [ "v0" ] ],
     [ "cell1:DT", "bb1:34t.c", "white", [ "v0" ] ],
     [ "cell2:DT", "bb1:34t.d", "white", [ "v0" ] ],
-    [ "bb1:34t.e", "uno:7", "white", [ "v0", "h787.2" ] ],
+    [ "bb1:34t.e", "uno:6", "white", [ "v0", "h787.2" ] ],
     [ "cell6:GND", "bb1:bn.7", "black", [ "v0" ] ],
     [ "cell4:GND", "bb1:bn.15", "black", [ "v0" ] ],
     [ "cell5:GND", "bb1:bn.22", "black", [ "v0" ] ],
@@ -311,12 +359,31 @@
     [ "cell4:VCC", "bb1:bp.17", "red", [ "v0" ] ],
     [ "cell6:VCC", "bb1:bp.10", "red", [ "v0" ] ],
     [ "drv6:VDD", "bb1:bp.12", "red", [ "h28.65", "v-67.28", "h57.6" ] ],
-    [ "cell6:DT", "mux1:I0", "violet", [ "v0" ] ],
-    [ "cell4:SCK", "mux1:I1", "violet", [ "v0" ] ],
-    [ "cell5:SCK", "mux1:I2", "violet", [ "v0" ] ],
-    [ "cell3:SCK", "mux1:I3", "violet", [ "v0" ] ],
-    [ "cell1:SCK", "mux1:I4", "violet", [ "v0" ] ],
-    [ "cell2:SCK", "mux1:I5", "violet", [ "v0" ] ]
+    [ "sr3:VCC", "sr3:MR", "red", [ "h8.4", "v57.6" ] ],
+    [ "sr3:VCC", "bb1:bp.43", "red", [ "h-1.2", "v-9.6", "h-48", "v105.6", "h-210.4" ] ],
+    [ "sr3:GND", "bb1:bn.42", "black", [ "h-9.6", "v38.4", "h-229.6" ] ],
+    [ "r3:2", "cell2:SCK", "violet", [ "h0" ] ],
+    [ "r3:2", "sr3:Q0", "violet", [ "h201.6", "v46.8" ] ],
+    [ "cell2:GND", "r3:1", "black", [ "v0" ] ],
+    [ "cell1:GND", "r5:1", "black", [ "v0" ] ],
+    [ "r5:2", "cell1:SCK", "violet", [ "h0" ] ],
+    [ "r5:2", "sr3:Q1", "violet", [ "h0" ] ],
+    [ "sr3:Q2", "r7:2", "violet", [ "h0" ] ],
+    [ "r7:2", "cell3:SCK", "violet", [ "h-38.4", "v-58.8" ] ],
+    [ "cell3:GND", "r7:1", "black", [ "v-9.6", "h57.3" ] ],
+    [ "cell5:GND", "r9:1", "black", [ "v0" ] ],
+    [ "cell5:SCK", "r9:2", "violet", [ "v0" ] ],
+    [ "r9:2", "sr3:Q3", "violet", [ "h0" ] ],
+    [ "cell4:GND", "r11:1", "black", [ "v0" ] ],
+    [ "cell4:SCK", "r11:2", "violet", [ "v0" ] ],
+    [ "r11:2", "sr3:Q4", "violet", [ "h0" ] ],
+    [ "cell6:GND", "r12:1", "black", [ "v0" ] ],
+    [ "cell6:DT", "r12:2", "violet", [ "v0" ] ],
+    [ "r12:2", "sr3:Q5", "violet", [ "h0" ] ],
+    [ "sr3:SHCP", "uno:5", "green", [ "h0" ] ],
+    [ "sr3:STCP", "uno:4", "green", [ "h0" ] ],
+    [ "sr3:OE", "uno:3", "green", [ "h0" ] ],
+    [ "sr3:DS", "uno:2", "green", [ "h0" ] ]
   ],
   "serialMonitor": { "display": "always", "newline": "lf", "convertEol": false },
   "dependencies": {}
