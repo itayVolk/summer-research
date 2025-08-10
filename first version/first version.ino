@@ -7,6 +7,7 @@ int index = 0;
 
 void setup() {
   Serial.begin(9600);
+  Serial.println("on");
   pinMode(clock, OUTPUT);
   lengths = calloc(sizeof(sensors)/sizeof(int), sizeof(long));
   for (int i = 0; i < sizeof(sensors)/sizeof(int); i++) {
@@ -53,10 +54,11 @@ long* read(int pins[], int count) {
   return out;
 }
 
-const int step = 200;
+const int step = 50;
 const int thres = 500;
 
 void loop() {
+  long * out = read(sensors, sizeof(sensors)/sizeof(int));
   while(Serial.available()) {
     long val = 0;
     char cur = Serial.read();
@@ -68,17 +70,19 @@ void loop() {
     }
     lengths[index++] = val;
     Serial.println(lengths[index-1]);
+    Serial.println(out[index-1]);
     if (index == sizeof(sensors)/sizeof(int)) {
       index = 0;
     }
   }
 
-  long * out = read(sensors, sizeof(sensors)/sizeof(int));
   for (int i = 0; i < sizeof(sensors)/sizeof(int); i++) {
     if (!lengths[i]) {
       delay(50);
       break;
     }
+    Serial.println(lengths[i]);
+    Serial.println(out[i]);
 
     if (out[i] > lengths[i]+thres) {
       move(LOW, step, pins[i]);
