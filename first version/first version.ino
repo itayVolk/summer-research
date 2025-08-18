@@ -3,6 +3,7 @@ const int sensors[1] = {3};
 const int clock = 2;
 
 long * lengths;
+long * prev;
 int index = 0;
 
 void setup() {
@@ -10,6 +11,7 @@ void setup() {
   Serial.println("on");
   pinMode(clock, OUTPUT);
   lengths = calloc(sizeof(sensors)/sizeof(int), sizeof(long));
+  prev = calloc(sizeof(sensors)/sizeof(int), sizeof(long));
   for (int i = 0; i < sizeof(sensors)/sizeof(int); i++) {
     for (int j = 0; j < 2; j++) {
       pinMode(pins[i][j], OUTPUT);
@@ -45,16 +47,20 @@ long* read(int pins[], int count) {
   // convert the binary format
   for (int i = 0; i < count; i++) {
     out[i] ^= 0x800000;
+    if (out[i] == 8388608) {
+      out[i] = prev[i];
+    }
   }
 
   for (char i = 0; i < 3; i++) {
     digitalWrite(clock, HIGH);
     digitalWrite(clock, LOW);
   }
+  prev = out;
   return out;
 }
 
-const int step = 50;
+const int step = 200;
 const int thres = 500;
 
 void loop() {
@@ -77,16 +83,18 @@ void loop() {
   }
 
   for (int i = 0; i < sizeof(sensors)/sizeof(int); i++) {
-    if (!lengths[i]) {
+    // Serial.println(out[i]);
+    if (!lengths[i] || !out[i]) {
       delay(50);
       break;
     }
-    Serial.println(lengths[i]);
-    Serial.println(out[i]);
+    // Serial.println(lengths[i]);
 
     if (out[i] > lengths[i]+thres) {
+      // Serial.println("for");
       move(LOW, step, pins[i]);
     } else if (out[i] < lengths[i]-thres) {
+      // Serial.println("back");
       move(HIGH, step, pins[i]);
     }
   }
