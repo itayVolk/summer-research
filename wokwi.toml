@@ -1,6 +1,6 @@
 [wokwi]
 version = 1
-firmware = 'compiled/registers.ino.hex'
-elf = 'compiled/registers.ino.elf'
+firmware = 'compiled/manual.ino.hex'
+elf = 'compiled/manual.ino.elf'
 gdbServerPort=3333
 rfc2217ServerPort = 4000

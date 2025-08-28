@@ -35,7 +35,6 @@ void loop() {
             default:
                 dir = 0;
         }
-        dir = (cur == 'u')*2-1;
     }
     if (dir) {
         move((dir+1)/2, 200, pins);
