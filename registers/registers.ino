@@ -13,7 +13,7 @@ const int count = 2;
 const int step = 200;
 const int thres = 100;
 
-long * lengths = calloc(count*3, sizeof(long));
+long * lengths = (long *) calloc(count*3, sizeof(long));
 int index = 0;
 
 void setup() {
@@ -54,7 +54,7 @@ void move(int dirs[], int steps[]) {
 }
 
 long* read() {
-    long * out = calloc(count*3, sizeof(long));
+    long * out = (long *) calloc(count*3, sizeof(long));
     digitalWrite(sensorsLatch, LOW);
     digitalWrite(sensorsData, HIGH);
     digitalWrite(sensorsClock, HIGH);

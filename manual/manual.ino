@@ -8,7 +8,7 @@ void setup() {
 }
 
 // rotate the motor
-void move(int dir, int step, int motor[2]) {
+void move(int dir, int step, const int motor[2]) {
   digitalWrite(motor[1],dir); // Enables the motor to move in a particular direction
   for(int x = 0; x < step; x++) {
     digitalWrite(motor[0],HIGH); 

@@ -10,8 +10,8 @@ void setup() {
   Serial.begin(9600);
   Serial.println("on");
   pinMode(clock, OUTPUT);
-  lengths = calloc(sizeof(sensors)/sizeof(int), sizeof(long));
-  prev = calloc(sizeof(sensors)/sizeof(int), sizeof(long));
+  lengths = (long *)calloc(sizeof(sensors)/sizeof(int), sizeof(long));
+  prev = (long *)calloc(sizeof(sensors)/sizeof(int), sizeof(long));
   for (int i = 0; i < sizeof(sensors)/sizeof(int); i++) {
     for (int j = 0; j < 2; j++) {
       pinMode(pins[i][j], OUTPUT);
@@ -22,7 +22,7 @@ void setup() {
 }
 
 // rotate the motor
-void move(int dir, int step, int motor[2]) {
+void move(int dir, int step, const int motor[2]) {
   digitalWrite(motor[1],dir); // Enables the motor to move in a particular direction
   for(int x = 0; x < step; x++) {
     digitalWrite(motor[0],HIGH); 
@@ -32,8 +32,8 @@ void move(int dir, int step, int motor[2]) {
   }
 }
 
-long* read(int pins[], int count) {
-  long * out = calloc(count, sizeof(long));
+long* read(const int pins[], int count) {
+  long * out = (long *)calloc(count, sizeof(long));
 
   //read 24 bits
   for (int j = 0; j < 24; j++) {
