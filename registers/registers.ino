@@ -94,7 +94,7 @@ void loop() {
         long val = 0;
         char cur = Serial.read();
         while (cur != '\n') {
-            if (cur != 0xFFFFFFFF) {
+            if (cur) {
                 val = val*10 + cur - '0';
             }
             cur = Serial.read();

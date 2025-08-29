@@ -24,7 +24,7 @@ void loop() {
         char cur;
         do {
             cur = Serial.read();
-        } while(cur == '\n' || cur == 0xFFFFFFFF);
+        } while(cur == '\n');
         switch(cur) {
             case 'u':
                 dir = 1;
