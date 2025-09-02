@@ -29,10 +29,8 @@ void loop() {
         } while(!isAlpha(cur) && Serial.available());
         if (!isAlpha(cur)) {
             return;
-        } if (isUpperCase(cur)) {
-            cur -= 'A'-'a';
         }
-        switch(cur) {
+        switch(toLowerCase(cur)) {
             case 'u':
                 dir = 1;
                 break;
