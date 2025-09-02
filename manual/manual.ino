@@ -1,3 +1,5 @@
+#include "HardwareSerial.h"
+#include "WCharacter.h"
 const int pins[2] = {13, 12};
 
 void setup() {
@@ -24,7 +26,12 @@ void loop() {
         char cur;
         do {
             cur = Serial.read();
-        } while(cur == '\n');
+        } while(!isAlpha(cur) && Serial.available());
+        if (!isAlpha(cur)) {
+            return;
+        } if (isUpperCase(cur)) {
+            cur -= 'A'-'a';
+        }
         switch(cur) {
             case 'u':
                 dir = 1;
